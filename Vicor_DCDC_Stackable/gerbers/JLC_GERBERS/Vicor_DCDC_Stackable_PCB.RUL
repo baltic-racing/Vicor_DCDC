@@ -1,0 +1,18 @@
+DRC Rules Export File for PCB: C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc
+RuleKind=Clearance|RuleName=Clearance_HV_Sense_Float|Scope=Board|Minimum=98.43
+RuleKind=Clearance|RuleName=Clearance_HV_GND|Scope=Board|Minimum=98.43
+RuleKind=Clearance|RuleName=Clearance_HV_Low_Float|Scope=Board|Minimum=98.43
+RuleKind=Clearance|RuleName=Clearance_HV_uFLT_Float|Scope=Board|Minimum=98.43
+RuleKind=Clearance|RuleName=Clearance_HV_uFLT_Low|Scope=Board|Minimum=98.43
+RuleKind=Clearance|RuleName=Clearance_HV_Fuse_Float|Scope=Board|Minimum=98.43
+RuleKind=Clearance|RuleName=Clearance_HV_Fuse_Low|Scope=Board|Minimum=98.43
+RuleKind=Clearance|RuleName=Clearance_HV_High_Float|Scope=Board|Minimum=98.43
+RuleKind=Clearance|RuleName=Clearance_HV_FLT_Float|Scope=Board|Minimum=98.43
+RuleKind=Clearance|RuleName=Clearance_HV_FLT_Low|Scope=Board|Minimum=98.43
+RuleKind=Clearance|RuleName=Clearance_HV_High_Low|Scope=Board|Minimum=98.43
+RuleKind=MinimumAnnularRing|RuleName=MinimumAnnularRing_Via|Scope=Board|Minimum=5.91
+RuleKind=MinimumAnnularRing|RuleName=MinimumAnnularRing_PTH|Scope=Board|Minimum=11.81
+RuleKind=ShortCircuit|RuleName=ShortCircuit|Scope=Board|Allowed=0
+RuleKind=SolderMaskExpansion|RuleName=SolderMaskExpansion|Scope=Board|Minimum=1.97
+RuleKind=Width|RuleName=Width|Scope=Board|Minimum=3.54
+RuleKind=Clearance|RuleName=Clearance|Scope=Board|Minimum=5.00

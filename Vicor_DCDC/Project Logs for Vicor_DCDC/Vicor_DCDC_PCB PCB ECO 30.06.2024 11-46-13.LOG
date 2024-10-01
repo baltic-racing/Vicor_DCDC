@@ -1,0 +1,4 @@
+Removed Pin From Net: NetName=HV_High Pin=R63-2
+Removed Pin From Net: NetName=HV_Mid Pin=R73-2
+Added Pin To Net: NetName=HV_11_uFLT Pin=R63-2
+Added Pin To Net: NetName=HV_21_uFLT Pin=R73-2

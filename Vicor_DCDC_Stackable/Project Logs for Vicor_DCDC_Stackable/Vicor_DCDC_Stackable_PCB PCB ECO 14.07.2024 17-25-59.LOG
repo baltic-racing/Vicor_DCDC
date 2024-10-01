@@ -1,0 +1,9 @@
+Removed Pin From Net: NetName=GND Pin=LV_POWER-1
+Removed Pin From Net: NetName=24V_DCDC_Out Pin=LV_POWER-2
+Removed Pin From Net: NetName=GND Pin=LV_POWER-3
+Removed Pin From Net: NetName=24V_DCDC_Out Pin=LV_POWER-4
+Added Component: Designator=LV_POWER(1720650004)
+Added Pin To Net: NetName=GND Pin=LV_POWER-1
+Added Pin To Net: NetName=24V_DCDC_Out Pin=LV_POWER-2
+Added Pin To Net: NetName=GND Pin=LV_POWER-3
+Added Pin To Net: NetName=24V_DCDC_Out Pin=LV_POWER-4

@@ -1,0 +1,23 @@
+Circuit: * C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Simulationen\SST\SST.asc
+
+C3: Increased Cpar to 4.7e-013
+C2: Increased Cpar to 4.7e-013
+.OP point found by inspection.
+
+Date: Mon May 20 15:41:19 2024
+Total elapsed time: 0.147 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 3888
+traniter = 3888
+tranpoints = 1721
+accept = 1573
+rejected = 148
+matrix size = 10
+fillins = 0
+solver = Normal
+Matrix Compiler1: 498 bytes object code size  0.1/0.1/[0.0]
+Matrix Compiler2: off  [0.0]/0.1/0.0
+

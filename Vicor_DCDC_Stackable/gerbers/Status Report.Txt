@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : PCB Document [Vicor_DCDC_Stackable_PCB.PcbDoc]
+   Generated File[Vicor_DCDC_Stackable_PCB.TXT]
+   Generated File[Vicor_DCDC_Stackable_PCB.LDP]
+   Generated File[Vicor_DCDC_Stackable_PCB.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 17:44:16 On 14.07.2024

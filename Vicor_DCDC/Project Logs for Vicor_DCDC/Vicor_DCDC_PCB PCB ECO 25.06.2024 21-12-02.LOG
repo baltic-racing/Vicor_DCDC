@@ -1,0 +1,36 @@
+Removed Member From Class: ClassName=HV_ACCU Member=HV_Low
+Removed Member From Class: ClassName=HV_ACCU Member=HV_Mid
+Removed Member From Class: ClassName=HV_ACCU Member=NetC10_1
+Removed Member From Class: ClassName=HV_ACCU Member=NetC11_1
+Removed Member From Class: ClassName=HV_ACCU Member=NetC11_2
+Removed Member From Class: ClassName=HV_ACCU Member=NetC20_1
+Removed Member From Class: ClassName=HV_ACCU Member=NetC21_1
+Removed Member From Class: ClassName=HV_ACCU Member=NetC21_2
+Removed Member From Class: ClassName=HV_ACCU Member=NetD10_1
+Removed Member From Class: ClassName=HV_ACCU Member=NetD10_2
+Removed Member From Class: ClassName=HV_ACCU Member=NetD20_1
+Removed Member From Class: ClassName=HV_ACCU Member=NetD20_2
+Change Net Name : Old Net Name=HV_Low New Net Name=HV_20_uFLT
+Change Net Name : Old Net Name=HV_Mid New Net Name=HV_10_uFLT
+Change Net Name : Old Net Name=NetC10_1 New Net Name=HV_10_SSense
+Change Net Name : Old Net Name=NetC11_1 New Net Name=HV_10_FLT
+Change Net Name : Old Net Name=NetC11_2 New Net Name=HV_11_FLT
+Change Net Name : Old Net Name=NetC20_1 New Net Name=HV_20_SSense
+Change Net Name : Old Net Name=NetC21_1 New Net Name=HV_20_FLT
+Change Net Name : Old Net Name=NetC21_2 New Net Name=HV_21_FLT
+Change Net Name : Old Net Name=NetD10_1 New Net Name=HV_11_uFLT
+Change Net Name : Old Net Name=NetD10_2 New Net Name=HV_11_Fused
+Change Net Name : Old Net Name=NetD20_1 New Net Name=HV_21_uFLT
+Change Net Name : Old Net Name=NetD20_2 New Net Name=HV_21_Fused
+Added Member To Class: ClassName=HV_ACCU Member=Wire HV_10_FLT
+Added Member To Class: ClassName=HV_ACCU Member=Wire HV_10_SSense
+Added Member To Class: ClassName=HV_ACCU Member=Wire HV_10_uFLT
+Added Member To Class: ClassName=HV_ACCU Member=Wire HV_11_FLT
+Added Member To Class: ClassName=HV_ACCU Member=Wire HV_11_Fused
+Added Member To Class: ClassName=HV_ACCU Member=Wire HV_11_uFLT
+Added Member To Class: ClassName=HV_ACCU Member=Wire HV_20_FLT
+Added Member To Class: ClassName=HV_ACCU Member=Wire HV_20_SSense
+Added Member To Class: ClassName=HV_ACCU Member=Wire HV_20_uFLT
+Added Member To Class: ClassName=HV_ACCU Member=Wire HV_21_FLT
+Added Member To Class: ClassName=HV_ACCU Member=Wire HV_21_Fused
+Added Member To Class: ClassName=HV_ACCU Member=Wire HV_21_uFLT

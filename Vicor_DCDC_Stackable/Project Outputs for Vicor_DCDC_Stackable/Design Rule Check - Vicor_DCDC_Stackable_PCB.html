@@ -1,0 +1,876 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD21\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">14.07.2024</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">17:28:17</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc" class="file"><acronym title="C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc">C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">156</td></tr>
+</table>
+</td>
+</table><a name="IDJWL3IMQLPCBTPWH4ZCA2L5AEJF2IBGY1BVMLJIK240N3WKFLN1UH"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID4UDQZS2SG0JIPDT5J4XAWB2LUHJ1W3PNRZTDPFDZ4ZJIEWWMSPDM">Clearance Constraint (Gap=2.5mm) (InNet('HV_FLT')),(InNet('HV_Low_Float'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDMUQGZBOWWYODHIVPQ5TENDNJIDY5NUWGO2HOFHMS1F0GX2A2GLIP">Clearance Constraint (Gap=2.5mm) (InNet('HV_High')),(InNet('HV_Low_Float'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDRRURZVTSORDMHISXTCTQERA1FMU0JJS3JUHDKGDUODNEVFV1CZ3I">Clearance Constraint (Gap=2.5mm) (InNet('HV_Fused')),(InNet('HV_Low'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDFGNY1I0TZDFCKMHOMJ2EALIWKIJV14BPRGHY24E5JINOK1WNLK2H">Clearance Constraint (Gap=0.127mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDOZUDIDFLNYMNCXHRIUEHROTHTPGLXMNHZGRETZD535JSOFPM0DUL">Clearance Constraint (Gap=2.5mm) (InNet('HV_High')),(InNet('HV_Low'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDHC3CHLHGSSXJFHYQOCDWAA1M3BS45KWCHXO5NCUUOFDQCC543GE">Clearance Constraint (Gap=2.5mm) (InNet('HV_FLT')),(InNet('HV_Low'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDAYACZKJI2L3U0YAV31C4DSPIERK4DL5PJI2KPFUAJXXPXA2VSOC">Clearance Constraint (Gap=2.5mm) (InNet('HV_Low')),(InNet('HV_Low_Float'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDR3PEIMG3EMOAMBO5SNI50L3NDLHQ3KFIYP2NKHNSENRZPBKEYEXK">Clearance Constraint (Gap=2.5mm) (InNetClass('HV_ACCU')),(InNet('GND'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDN41COKNFLD1NLOCHHEE5F0KJRJPSR5EJRFOJ34KH1VITZW0GVWML">Clearance Constraint (Gap=2.5mm) (InNet('HV_Low_Sense')),(InNet('HV_Low_Float'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID20AOIRG14ILTI3LZOCNUWYCHJD2NDV5GHQRBQZH3CUA1FG1U4UWD">Clearance Constraint (Gap=2.5mm) (InNet('HV_Fused')),(InNet('HV_Low_Float'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZARNGIRZQHHOHI2CY5NGFH111HDCQVLIN0OSC0F3LRTW0O3WZLPB">Clearance Constraint (Gap=2.5mm) (InNet('HV_uFLT')),(InNet('HV_Low'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDTYFILQ10PR12CO5N1TTXJIEITLBU10CDRFPBUKQGXN0BUT52TOL">Clearance Constraint (Gap=2.5mm) (InNet('HV_uFLT')),(InNet('HV_Low_Float'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDOR0TE43IFVHKEVULXAVA3INC2B1FIJYOHPRDR4PG4T2OEDAMZITB">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">12</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDQLUKEZ15ZJFRFTYQRCECGITCUMXWDNL4L0XG3EPYKO0IH32RMAVP">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">2</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDXL2X2GCM1PUEHYYAPGJUAMQD2D20PCGSBSJVE4F0CHIVLOUMXOKG">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDO5KY0K4Z0EU2C11GX1ZGPF0WZDJOXJQEUUQY3DCXR5D5UJXB4LKM">Width Constraint (Min=0.09mm) (Max=20mm) (Preferred=0.3mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZEAR2QAF244DBOAMKFX5WGU0OPCW2JB2E4B4N5LSQHMYWJ0RGTNM">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDI0J3UVRDIQBFGY1WPCY0DCJRTLJHEIW3EHEEKKD3RJF0RDYOV2RO">Minimum Annular Ring (Minimum=0.15mm) (IsVia)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDNO32DTOJGY45BIIWWH3OUAH54MFBWQSIAKWPCZMBHVR0MIMQN5WG">Minimum Annular Ring (Minimum=0.3mm) (InLayerStackRegion('Default Layer Stack Region'))</a></td>
+<td class="column2">54</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDAREYBX54OXGPNIHBWJ1LWRBPYONBQBLF0ZT5Q3M1KF3CTNH0ECYG">Hole Size Constraint (Min=0.15mm) (Max=6.3mm) (IsVia)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDAGB0AW3FR5ZZKPG3M4JZM1V2MM5QXEACOITRUXF5LDC3MMCPL23J">Hole Size Constraint (Min=0.2mm) (Max=6.3mm) (InLayerStackRegion('Default Layer Stack Region'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDF1TGAPQL2ZQGJFZGXH2DERYR4HFJHFCH1SVIJFJ5HXLECPDACA2I">Hole To Hole Clearance (Gap=0.5mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDFUQVEZJZ1GKVNOB3JFRDJJR2NHVTGP24PPFGJ0NTF5TLS3MD0DZI">Minimum Solder Mask Sliver (Gap=0.1mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDE43WIO5XC0MMGCRRQ2KNQE01QOGUK4J3FLYGF1F0HU1SOYCRAITL">Silk To Solder Mask (Clearance=0.15mm) (IsPad),(All)</a></td>
+<td class="column2">41</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID0B441OROJJV5D342PGFOI3GTZNE05HSQ0VNKVVFM1HGRU2RYNMRP">Silk to Silk (Clearance=0.15mm) (All),(All)</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDKIQMCDNRYBHTHSFJI14410RUPEKSYC000BJ0NUJEXQDR2QTOKEMK">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDIFMM0D23WBCRJDWAB4NITFFDAGMAY2BVJZTOADGSSMRRLXJ0PWCF">Board Clearance Constraint (Gap=0mm) (All)</a></td>
+<td class="column2">46</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDH1BMW03SDEP2JB0UPVRXP2GNHI3EBG02MLVQVWP0N0WP25NH1GTP">Height Constraint (Min=0mm) (Max=200mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">156</td>
+</tr>
+</table><br><a name="IDOR0TE43IFVHKEVULXAVA3INC2B1FIJYOHPRDR4PG4T2OEDAMZITB"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Short-Circuit Constraint (Allowed=No) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True">Short-Circuit Constraint: Between Pad CTRL-(170mm,77.44mm) on Multi-Layer And Polygon Region (11 hole(s)) Bottom Layer Location : [X = 0mm][Y = 0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True">Short-Circuit Constraint: Between Pad CTRL-(179mm,77.44mm) on Multi-Layer And Polygon Region (11 hole(s)) Bottom Layer Location : [X = 0mm][Y = 0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True">Short-Circuit Constraint: Between Pad CTRL-(179mm,77.44mm) on Multi-Layer And Polygon Region (2 hole(s)) Top Layer Location : [X = 0mm][Y = 0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True">Short-Circuit Constraint: Between Pad CTRL-(179mm,77.44mm) on Multi-Layer And Polygon Region (4 hole(s)) Top Layer Location : [X = 0mm][Y = 0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True">Short-Circuit Constraint: Between Pad CTRL-(179mm,77.44mm) on Multi-Layer And Polygon Region (5 hole(s)) Inner Layer 1 Location : [X = 0mm][Y = 0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True">Short-Circuit Constraint: Between Pad CTRL-(179mm,77.44mm) on Multi-Layer And Polygon Region (7 hole(s)) Bottom Layer Location : [X = 0mm][Y = 0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True">Short-Circuit Constraint: Between Pad LV_POWER-NC(171.53mm,58.175mm) on Multi-Layer And Polygon Region (5 hole(s)) Inner Layer 1 Location : [X = 0mm][Y = 0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True">Short-Circuit Constraint: Between Pad LV_POWER-NC(171.53mm,58.175mm) on Multi-Layer And Polygon Region (7 hole(s)) Bottom Layer Location : [X = 0mm][Y = 0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True">Short-Circuit Constraint: Between Pad LV_POWER-NC(187.57mm,58.175mm) on Multi-Layer And Polygon Region (2 hole(s)) Top Layer Location : [X = 0mm][Y = 0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True">Short-Circuit Constraint: Between Pad LV_POWER-NC(187.57mm,58.175mm) on Multi-Layer And Polygon Region (5 hole(s)) Inner Layer 1 Location : [X = 0mm][Y = 0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True">Short-Circuit Constraint: Between Pad LV_POWER-NC(187.57mm,58.175mm) on Multi-Layer And Polygon Region (7 hole(s)) Bottom Layer Location : [X = 0mm][Y = 0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=125795.18mil|Location2.X=-125795.18mil|Location1.Y=125795.18mil|Location2.Y=-125795.18mil|Absolute=True">Short-Circuit Constraint: Between Pad NTC-(121mm,32.56mm) on Multi-Layer And Polygon Region (11 hole(s)) Bottom Layer Location : [X = 0mm][Y = 0mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDQLUKEZ15ZJFRFTYQRCECGITCUMXWDNL4L0XG3EPYKO0IH32RMAVP"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2842.52mil|Location2.X=3372.047mil|Location1.Y=2700.197mil|Location2.Y=3090.551mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2842.52mil|Location2.X=3372.047mil|Location1.Y=2700.197mil|Location2.Y=3090.551mil|Absolute=True">Un-Routed Net Constraint: Net HV_Fused Between Pad F1-2(74mm,76.7mm) on Multi-Layer And Pad D10-2(84mm,69.395mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2842.52mil|Location2.X=2984.252mil|Location1.Y=1236.614mil|Location2.Y=1791.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2842.52mil|Location2.X=2984.252mil|Location1.Y=1236.614mil|Location2.Y=1791.339mil|Absolute=True">Un-Routed Net Constraint: Net HV_High Between Pad F1-1(74mm,33.21mm) on Multi-Layer And Pad F1-1(74mm,43.7mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDNO32DTOJGY45BIIWWH3OUAH54MFBWQSIAKWPCZMBHVR0MIMQN5WG"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Annular Ring (Minimum=0.3mm) (InLayerStackRegion('Default Layer Stack Region'))</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4028.903mil|Location2.X=4041.964mil|Location1.Y=2871.422mil|Location2.Y=2884.483mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4028.903mil|Location2.X=4041.964mil|Location1.Y=2871.422mil|Location2.Y=2884.483mil|Absolute=True">Minimum Annular Ring: (0.2mm &lt; 0.3mm) Pad C00-1(102.5mm,72.5mm) on Multi-Layer (Annular Ring=0.2mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4619.454mil|Location2.X=4632.515mil|Location1.Y=2871.422mil|Location2.Y=2884.483mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4619.454mil|Location2.X=4632.515mil|Location1.Y=2871.422mil|Location2.Y=2884.483mil|Absolute=True">Minimum Annular Ring: (0.2mm &lt; 0.3mm) Pad C00-2(117.5mm,72.5mm) on Multi-Layer (Annular Ring=0.2mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4028.903mil|Location2.X=4041.964mil|Location1.Y=1493.469mil|Location2.Y=1506.531mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4028.903mil|Location2.X=4041.964mil|Location1.Y=1493.469mil|Location2.Y=1506.531mil|Absolute=True">Minimum Annular Ring: (0.2mm &lt; 0.3mm) Pad C01-1(102.5mm,37.5mm) on Multi-Layer (Annular Ring=0.2mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4619.454mil|Location2.X=4632.515mil|Location1.Y=1493.469mil|Location2.Y=1506.531mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4619.454mil|Location2.X=4632.515mil|Location1.Y=1493.469mil|Location2.Y=1506.531mil|Absolute=True">Minimum Annular Ring: (0.2mm &lt; 0.3mm) Pad C01-2(117.5mm,37.5mm) on Multi-Layer (Annular Ring=0.2mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1765.123mil|Location2.X=1778.184mil|Location1.Y=2195.733mil|Location2.Y=2208.794mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1765.123mil|Location2.X=1778.184mil|Location1.Y=2195.733mil|Location2.Y=2208.794mil|Absolute=True">Minimum Annular Ring: (0.275mm &lt; 0.3mm) Pad C11-1(45mm,55.25mm) on Multi-Layer (Annular Ring=0.275mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1765.123mil|Location2.X=1778.184mil|Location1.Y=3081.56mil|Location2.Y=3094.621mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1765.123mil|Location2.X=1778.184mil|Location1.Y=3081.56mil|Location2.Y=3094.621mil|Absolute=True">Minimum Annular Ring: (0.275mm &lt; 0.3mm) Pad C11-2(45mm,77.75mm) on Multi-Layer (Annular Ring=0.275mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1391.107mil|Location2.X=1404.168mil|Location1.Y=1792.19mil|Location2.Y=1805.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1391.107mil|Location2.X=1404.168mil|Location1.Y=1792.19mil|Location2.Y=1805.251mil|Absolute=True">Minimum Annular Ring: (0.275mm &lt; 0.3mm) Pad C12-1(35.5mm,45mm) on Multi-Layer (Annular Ring=0.275mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1391.107mil|Location2.X=1404.168mil|Location1.Y=2678.017mil|Location2.Y=2691.078mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1391.107mil|Location2.X=1404.168mil|Location1.Y=2678.017mil|Location2.Y=2691.078mil|Absolute=True">Minimum Annular Ring: (0.275mm &lt; 0.3mm) Pad C12-2(35.5mm,67.5mm) on Multi-Layer (Annular Ring=0.275mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6194.257mil|Location2.X=6207.318mil|Location1.Y=2850.753mil|Location2.Y=2863.814mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6194.257mil|Location2.X=6207.318mil|Location1.Y=2850.753mil|Location2.Y=2863.814mil|Absolute=True">Minimum Annular Ring: (0.25mm &lt; 0.3mm) Pad C30-1(157.5mm,72mm) on Multi-Layer (Annular Ring=0.25mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6391.107mil|Location2.X=6404.168mil|Location1.Y=2850.753mil|Location2.Y=2863.814mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6391.107mil|Location2.X=6404.168mil|Location1.Y=2850.753mil|Location2.Y=2863.814mil|Absolute=True">Minimum Annular Ring: (0.25mm &lt; 0.3mm) Pad C30-2(162.5mm,72mm) on Multi-Layer (Annular Ring=0.25mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6332.052mil|Location2.X=6345.113mil|Location1.Y=2038.253mil|Location2.Y=2051.314mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6332.052mil|Location2.X=6345.113mil|Location1.Y=2038.253mil|Location2.Y=2051.314mil|Absolute=True">Minimum Annular Ring: (0.275mm &lt; 0.3mm) Pad C31-1(161mm,51.25mm) on Multi-Layer (Annular Ring=0.275mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6332.052mil|Location2.X=6345.113mil|Location1.Y=2333.528mil|Location2.Y=2346.59mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6332.052mil|Location2.X=6345.113mil|Location1.Y=2333.528mil|Location2.Y=2346.59mil|Absolute=True">Minimum Annular Ring: (0.275mm &lt; 0.3mm) Pad C31-2(161mm,58.75mm) on Multi-Layer (Annular Ring=0.275mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5662.761mil|Location2.X=5675.822mil|Location1.Y=2116.993mil|Location2.Y=2130.054mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5662.761mil|Location2.X=5675.822mil|Location1.Y=2116.993mil|Location2.Y=2130.054mil|Absolute=True">Minimum Annular Ring: (0.275mm &lt; 0.3mm) Pad C32-1(144mm,53.25mm) on Multi-Layer (Annular Ring=0.275mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5662.761mil|Location2.X=5675.822mil|Location1.Y=2412.269mil|Location2.Y=2425.33mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5662.761mil|Location2.X=5675.822mil|Location1.Y=2412.269mil|Location2.Y=2425.33mil|Absolute=True">Minimum Annular Ring: (0.275mm &lt; 0.3mm) Pad C32-2(144mm,60.75mm) on Multi-Layer (Annular Ring=0.275mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6897.564mil|Location2.X=6910.625mil|Location1.Y=2887.17mil|Location2.Y=2900.231mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6897.564mil|Location2.X=6910.625mil|Location1.Y=2887.17mil|Location2.Y=2900.231mil|Absolute=True">Minimum Annular Ring: (0.252mm &lt; 0.3mm) Pad CTRL-1(176mm,73.5mm) on Multi-Layer (Annular Ring=0.252mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6804.493mil|Location2.X=6817.554mil|Location1.Y=2912.21mil|Location2.Y=2925.271mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6804.493mil|Location2.X=6817.554mil|Location1.Y=2912.21mil|Location2.Y=2925.271mil|Absolute=True">Minimum Annular Ring: (0.252mm &lt; 0.3mm) Pad CTRL-2(173mm,73.5mm) on Multi-Layer (Annular Ring=0.252mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6922.603mil|Location2.X=6935.664mil|Location1.Y=3030.32mil|Location2.Y=3043.381mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6922.603mil|Location2.X=6935.664mil|Location1.Y=3030.32mil|Location2.Y=3043.381mil|Absolute=True">Minimum Annular Ring: (0.252mm &lt; 0.3mm) Pad CTRL-3(176mm,76.5mm) on Multi-Layer (Annular Ring=0.252mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6804.493mil|Location2.X=6817.554mil|Location1.Y=3030.32mil|Location2.Y=3043.381mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6804.493mil|Location2.X=6817.554mil|Location1.Y=3030.32mil|Location2.Y=3043.381mil|Absolute=True">Minimum Annular Ring: (0.252mm &lt; 0.3mm) Pad CTRL-4(173mm,76.5mm) on Multi-Layer (Annular Ring=0.252mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4846.422mil|Location2.X=4859.483mil|Location1.Y=2972.308mil|Location2.Y=2985.369mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4846.422mil|Location2.X=4859.483mil|Location1.Y=2972.308mil|Location2.Y=2985.369mil|Absolute=True">Minimum Annular Ring: (0.275mm &lt; 0.3mm) Pad F3-I1(123.265mm,74.7mm) on Multi-Layer (Annular Ring=0.275mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4846.422mil|Location2.X=4859.483mil|Location1.Y=2838.45mil|Location2.Y=2851.511mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4846.422mil|Location2.X=4859.483mil|Location1.Y=2838.45mil|Location2.Y=2851.511mil|Absolute=True">Minimum Annular Ring: (0.275mm &lt; 0.3mm) Pad F3-I2(123.265mm,71.3mm) on Multi-Layer (Annular Ring=0.275mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5376.737mil|Location2.X=5389.798mil|Location1.Y=2972.308mil|Location2.Y=2985.369mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5376.737mil|Location2.X=5389.798mil|Location1.Y=2972.308mil|Location2.Y=2985.369mil|Absolute=True">Minimum Annular Ring: (0.275mm &lt; 0.3mm) Pad F3-O1(136.735mm,74.7mm) on Multi-Layer (Annular Ring=0.275mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5376.737mil|Location2.X=5389.798mil|Location1.Y=2838.45mil|Location2.Y=2851.511mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5376.737mil|Location2.X=5389.798mil|Location1.Y=2838.45mil|Location2.Y=2851.511mil|Absolute=True">Minimum Annular Ring: (0.275mm &lt; 0.3mm) Pad F3-O2(136.735mm,71.3mm) on Multi-Layer (Annular Ring=0.275mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3295.202mil|Location2.X=3308.263mil|Location1.Y=1450.162mil|Location2.Y=1463.223mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3295.202mil|Location2.X=3308.263mil|Location1.Y=1450.162mil|Location2.Y=1463.223mil|Absolute=True">Minimum Annular Ring: (0.252mm &lt; 0.3mm) Pad HV_Power-1(84.5mm,37mm) on Multi-Layer (Annular Ring=0.252mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3792.682mil|Location2.X=3805.743mil|Location1.Y=1357.091mil|Location2.Y=1370.152mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3792.682mil|Location2.X=3805.743mil|Location1.Y=1357.091mil|Location2.Y=1370.152mil|Absolute=True">Minimum Annular Ring: (0.252mm &lt; 0.3mm) Pad HV_Power-10(96.5mm,34mm) on Multi-Layer (Annular Ring=0.252mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3438.351mil|Location2.X=3451.412mil|Location1.Y=1475.202mil|Location2.Y=1488.263mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3438.351mil|Location2.X=3451.412mil|Location1.Y=1475.202mil|Location2.Y=1488.263mil|Absolute=True">Minimum Annular Ring: (0.252mm &lt; 0.3mm) Pad HV_Power-2(87.5mm,37mm) on Multi-Layer (Annular Ring=0.252mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3556.462mil|Location2.X=3569.523mil|Location1.Y=1475.202mil|Location2.Y=1488.263mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3556.462mil|Location2.X=3569.523mil|Location1.Y=1475.202mil|Location2.Y=1488.263mil|Absolute=True">Minimum Annular Ring: (0.252mm &lt; 0.3mm) Pad HV_Power-3(90.5mm,37mm) on Multi-Layer (Annular Ring=0.252mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3674.572mil|Location2.X=3687.633mil|Location1.Y=1475.202mil|Location2.Y=1488.263mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3674.572mil|Location2.X=3687.633mil|Location1.Y=1475.202mil|Location2.Y=1488.263mil|Absolute=True">Minimum Annular Ring: (0.252mm &lt; 0.3mm) Pad HV_Power-4(93.5mm,37mm) on Multi-Layer (Annular Ring=0.252mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3792.682mil|Location2.X=3805.743mil|Location1.Y=1475.202mil|Location2.Y=1488.263mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3792.682mil|Location2.X=3805.743mil|Location1.Y=1475.202mil|Location2.Y=1488.263mil|Absolute=True">Minimum Annular Ring: (0.252mm &lt; 0.3mm) Pad HV_Power-5(96.5mm,37mm) on Multi-Layer (Annular Ring=0.252mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3320.241mil|Location2.X=3333.302mil|Location1.Y=1357.091mil|Location2.Y=1370.152mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3320.241mil|Location2.X=3333.302mil|Location1.Y=1357.091mil|Location2.Y=1370.152mil|Absolute=True">Minimum Annular Ring: (0.252mm &lt; 0.3mm) Pad HV_Power-6(84.5mm,34mm) on Multi-Layer (Annular Ring=0.252mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3438.351mil|Location2.X=3451.412mil|Location1.Y=1357.091mil|Location2.Y=1370.152mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3438.351mil|Location2.X=3451.412mil|Location1.Y=1357.091mil|Location2.Y=1370.152mil|Absolute=True">Minimum Annular Ring: (0.252mm &lt; 0.3mm) Pad HV_Power-7(87.5mm,34mm) on Multi-Layer (Annular Ring=0.252mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3556.462mil|Location2.X=3569.523mil|Location1.Y=1357.091mil|Location2.Y=1370.152mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3556.462mil|Location2.X=3569.523mil|Location1.Y=1357.091mil|Location2.Y=1370.152mil|Absolute=True">Minimum Annular Ring: (0.252mm &lt; 0.3mm) Pad HV_Power-8(90.5mm,34mm) on Multi-Layer (Annular Ring=0.252mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3674.572mil|Location2.X=3687.633mil|Location1.Y=1357.091mil|Location2.Y=1370.152mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3674.572mil|Location2.X=3687.633mil|Location1.Y=1357.091mil|Location2.Y=1370.152mil|Absolute=True">Minimum Annular Ring: (0.252mm &lt; 0.3mm) Pad HV_Power-9(93.5mm,34mm) on Multi-Layer (Annular Ring=0.252mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6748.713mil|Location2.X=6757.587mil|Location1.Y=2285.917mil|Location2.Y=2294.791mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6748.713mil|Location2.X=6757.587mil|Location1.Y=2285.917mil|Location2.Y=2294.791mil|Absolute=True">Minimum Annular Ring: (No Ring) Pad LV_POWER-NC(171.53mm,58.175mm) on Multi-Layer (Annular Ring missing on Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7380.209mil|Location2.X=7389.083mil|Location1.Y=2285.917mil|Location2.Y=2294.791mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7380.209mil|Location2.X=7389.083mil|Location1.Y=2285.917mil|Location2.Y=2294.791mil|Absolute=True">Minimum Annular Ring: (No Ring) Pad LV_POWER-NC(187.57mm,58.175mm) on Multi-Layer (Annular Ring missing on Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4850.32mil|Location2.X=4863.381mil|Location1.Y=1430.477mil|Location2.Y=1443.538mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4850.32mil|Location2.X=4863.381mil|Location1.Y=1430.477mil|Location2.Y=1443.538mil|Absolute=True">Minimum Annular Ring: (0.252mm &lt; 0.3mm) Pad NTC-1(124mm,36.5mm) on Multi-Layer (Annular Ring=0.252mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4993.47mil|Location2.X=5006.53mil|Location1.Y=1455.517mil|Location2.Y=1468.578mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4993.47mil|Location2.X=5006.53mil|Location1.Y=1455.517mil|Location2.Y=1468.578mil|Absolute=True">Minimum Annular Ring: (0.252mm &lt; 0.3mm) Pad NTC-2(127mm,36.5mm) on Multi-Layer (Annular Ring=0.252mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4875.359mil|Location2.X=4888.42mil|Location1.Y=1337.407mil|Location2.Y=1350.467mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4875.359mil|Location2.X=4888.42mil|Location1.Y=1337.407mil|Location2.Y=1350.467mil|Absolute=True">Minimum Annular Ring: (0.252mm &lt; 0.3mm) Pad NTC-3(124mm,33.5mm) on Multi-Layer (Annular Ring=0.252mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4993.47mil|Location2.X=5006.53mil|Location1.Y=1337.407mil|Location2.Y=1350.467mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4993.47mil|Location2.X=5006.53mil|Location1.Y=1337.407mil|Location2.Y=1350.467mil|Absolute=True">Minimum Annular Ring: (0.252mm &lt; 0.3mm) Pad NTC-4(127mm,33.5mm) on Multi-Layer (Annular Ring=0.252mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5607.643mil|Location2.X=5620.704mil|Location1.Y=2742.485mil|Location2.Y=2755.546mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5607.643mil|Location2.X=5620.704mil|Location1.Y=2742.485mil|Location2.Y=2755.546mil|Absolute=True">Minimum Annular Ring: (0.25mm &lt; 0.3mm) Pad RV3-1(142.6mm,69.25mm) on Multi-Layer (Annular Ring=0.25mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5639.139mil|Location2.X=5652.2mil|Location1.Y=3037.761mil|Location2.Y=3050.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5639.139mil|Location2.X=5652.2mil|Location1.Y=3037.761mil|Location2.Y=3050.822mil|Absolute=True">Minimum Annular Ring: (0.25mm &lt; 0.3mm) Pad RV3-2(143.4mm,76.75mm) on Multi-Layer (Annular Ring=0.25mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3411.186mil|Location2.X=3424.247mil|Location1.Y=2247.603mil|Location2.Y=2260.664mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3411.186mil|Location2.X=3424.247mil|Location1.Y=2247.603mil|Location2.Y=2260.664mil|Absolute=True">Minimum Annular Ring: (0.25mm &lt; 0.3mm) Pad U1-2(86.81mm,56.38mm) on Multi-Layer (Annular Ring=0.25mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3411.186mil|Location2.X=3424.247mil|Location1.Y=2138.942mil|Location2.Y=2152.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3411.186mil|Location2.X=3424.247mil|Location1.Y=2138.942mil|Location2.Y=2152.003mil|Absolute=True">Minimum Annular Ring: (0.25mm &lt; 0.3mm) Pad U1-3(86.81mm,53.62mm) on Multi-Layer (Annular Ring=0.25mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3411.186mil|Location2.X=3424.247mil|Location1.Y=2030.674mil|Location2.Y=2043.735mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3411.186mil|Location2.X=3424.247mil|Location1.Y=2030.674mil|Location2.Y=2043.735mil|Absolute=True">Minimum Annular Ring: (0.25mm &lt; 0.3mm) Pad U1-4(86.81mm,50.87mm) on Multi-Layer (Annular Ring=0.25mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4599.769mil|Location2.X=4612.83mil|Location1.Y=2508.233mil|Location2.Y=2521.294mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4599.769mil|Location2.X=4612.83mil|Location1.Y=2508.233mil|Location2.Y=2521.294mil|Absolute=True">Minimum Annular Ring: (0.25mm &lt; 0.3mm) Via (117mm,63.5mm) from Top Layer to Bottom Layer (Annular Ring=0.25mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4678.509mil|Location2.X=4691.57mil|Location1.Y=2508.233mil|Location2.Y=2521.294mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4678.509mil|Location2.X=4691.57mil|Location1.Y=2508.233mil|Location2.Y=2521.294mil|Absolute=True">Minimum Annular Ring: (0.25mm &lt; 0.3mm) Via (119mm,63.5mm) from Top Layer to Bottom Layer (Annular Ring=0.25mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5367.485mil|Location2.X=5380.546mil|Location1.Y=1504.296mil|Location2.Y=1517.357mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5367.485mil|Location2.X=5380.546mil|Location1.Y=1504.296mil|Location2.Y=1517.357mil|Absolute=True">Minimum Annular Ring: (0.25mm &lt; 0.3mm) Via (136.5mm,38mm) from Top Layer to Bottom Layer (Annular Ring=0.25mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5367.485mil|Location2.X=5380.546mil|Location1.Y=1563.351mil|Location2.Y=1576.412mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5367.485mil|Location2.X=5380.546mil|Location1.Y=1563.351mil|Location2.Y=1576.412mil|Absolute=True">Minimum Annular Ring: (0.25mm &lt; 0.3mm) Via (136.5mm,39.5mm) from Top Layer to Bottom Layer (Annular Ring=0.25mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5446.225mil|Location2.X=5459.286mil|Location1.Y=1504.296mil|Location2.Y=1517.357mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5446.225mil|Location2.X=5459.286mil|Location1.Y=1504.296mil|Location2.Y=1517.357mil|Absolute=True">Minimum Annular Ring: (0.25mm &lt; 0.3mm) Via (138.5mm,38mm) from Top Layer to Bottom Layer (Annular Ring=0.25mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5446.225mil|Location2.X=5459.286mil|Location1.Y=1563.351mil|Location2.Y=1576.412mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5446.225mil|Location2.X=5459.286mil|Location1.Y=1563.351mil|Location2.Y=1576.412mil|Absolute=True">Minimum Annular Ring: (0.25mm &lt; 0.3mm) Via (138.5mm,39.5mm) from Top Layer to Bottom Layer (Annular Ring=0.25mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5958.036mil|Location2.X=5971.097mil|Location1.Y=1346.816mil|Location2.Y=1359.877mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5958.036mil|Location2.X=5971.097mil|Location1.Y=1346.816mil|Location2.Y=1359.877mil|Absolute=True">Minimum Annular Ring: (0.25mm &lt; 0.3mm) Via (151.5mm,34mm) from Top Layer to Bottom Layer (Annular Ring=0.25mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5958.036mil|Location2.X=5971.097mil|Location1.Y=1425.556mil|Location2.Y=1438.617mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5958.036mil|Location2.X=5971.097mil|Location1.Y=1425.556mil|Location2.Y=1438.617mil|Absolute=True">Minimum Annular Ring: (0.25mm &lt; 0.3mm) Via (151.5mm,36mm) from Top Layer to Bottom Layer (Annular Ring=0.25mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2040.714mil|Location2.X=2053.775mil|Location1.Y=2606.658mil|Location2.Y=2619.719mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2040.714mil|Location2.X=2053.775mil|Location1.Y=2606.658mil|Location2.Y=2619.719mil|Absolute=True">Minimum Annular Ring: (0.25mm &lt; 0.3mm) Via (52mm,66mm) from Top Layer to Bottom Layer (Annular Ring=0.25mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2198.194mil|Location2.X=2211.255mil|Location1.Y=1248.391mil|Location2.Y=1261.452mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2198.194mil|Location2.X=2211.255mil|Location1.Y=1248.391mil|Location2.Y=1261.452mil|Absolute=True">Minimum Annular Ring: (0.25mm &lt; 0.3mm) Via (56mm,31.5mm) from Top Layer to Bottom Layer (Annular Ring=0.25mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2965.91mil|Location2.X=2978.971mil|Location1.Y=2429.493mil|Location2.Y=2442.554mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2965.91mil|Location2.X=2978.971mil|Location1.Y=2429.493mil|Location2.Y=2442.554mil|Absolute=True">Minimum Annular Ring: (0.25mm &lt; 0.3mm) Via (75.5mm,61.5mm) from Top Layer to Bottom Layer (Annular Ring=0.25mm) On (Top Layer)</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDE43WIO5XC0MMGCRRQ2KNQE01QOGUK4J3FLYGF1F0HU1SOYCRAITL"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.15mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7104.286mil|Location2.X=7112.025mil|Location1.Y=2890.505mil|Location2.Y=2900.535mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7104.286mil|Location2.X=7112.025mil|Location1.Y=2890.505mil|Location2.Y=2900.535mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.107mm &lt; 0.15mm) Between Arc (180.3mm,73.5mm) on Top Overlay And Pad Free-(185mm,75mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.107mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2848.292mil|Location2.X=2855.448mil|Location1.Y=1900.95mil|Location2.Y=1908.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2848.292mil|Location2.X=2855.448mil|Location1.Y=1900.95mil|Location2.Y=1908.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.125mm &lt; 0.15mm) Between Pad C60-1(73mm,48.825mm) on Bottom Layer And Track (72.3mm,48.1mm)(72.3mm,50.9mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.125mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2892.584mil|Location2.X=2899.739mil|Location1.Y=1900.95mil|Location2.Y=1908.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2892.584mil|Location2.X=2899.739mil|Location1.Y=1900.95mil|Location2.Y=1908.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.125mm &lt; 0.15mm) Between Pad C60-1(73mm,48.825mm) on Bottom Layer And Track (73.7mm,48.1mm)(73.7mm,50.9mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.125mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2848.292mil|Location2.X=2855.448mil|Location1.Y=1954.1mil|Location2.Y=1961.255mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2848.292mil|Location2.X=2855.448mil|Location1.Y=1954.1mil|Location2.Y=1961.255mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.125mm &lt; 0.15mm) Between Pad C60-2(73mm,50.175mm) on Bottom Layer And Track (72.3mm,48.1mm)(72.3mm,50.9mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.125mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2892.584mil|Location2.X=2899.739mil|Location1.Y=1954.1mil|Location2.Y=1961.255mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2892.584mil|Location2.X=2899.739mil|Location1.Y=1954.1mil|Location2.Y=1961.255mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.125mm &lt; 0.15mm) Between Pad C60-2(73mm,50.175mm) on Bottom Layer And Track (73.7mm,48.1mm)(73.7mm,50.9mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.125mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3773.489mil|Location2.X=3780.645mil|Location1.Y=2019.06mil|Location2.Y=2026.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3773.489mil|Location2.X=3780.645mil|Location1.Y=2019.06mil|Location2.Y=2026.216mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.125mm &lt; 0.15mm) Between Pad C61-1(96.5mm,51.825mm) on Bottom Layer And Track (95.8mm,51.1mm)(95.8mm,53.9mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.125mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3817.78mil|Location2.X=3824.936mil|Location1.Y=2019.06mil|Location2.Y=2026.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3817.78mil|Location2.X=3824.936mil|Location1.Y=2019.06mil|Location2.Y=2026.216mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.125mm &lt; 0.15mm) Between Pad C61-1(96.5mm,51.825mm) on Bottom Layer And Track (97.2mm,51.1mm)(97.2mm,53.9mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.125mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3773.489mil|Location2.X=3780.645mil|Location1.Y=2072.21mil|Location2.Y=2079.365mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3773.489mil|Location2.X=3780.645mil|Location1.Y=2072.21mil|Location2.Y=2079.365mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.125mm &lt; 0.15mm) Between Pad C61-2(96.5mm,53.175mm) on Bottom Layer And Track (95.8mm,51.1mm)(95.8mm,53.9mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.125mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3817.78mil|Location2.X=3824.936mil|Location1.Y=2072.21mil|Location2.Y=2079.365mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3817.78mil|Location2.X=3824.936mil|Location1.Y=2072.21mil|Location2.Y=2079.365mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.125mm &lt; 0.15mm) Between Pad C61-2(96.5mm,53.175mm) on Bottom Layer And Track (97.2mm,51.1mm)(97.2mm,53.9mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.125mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4663.015mil|Location2.X=4673.18mil|Location1.Y=2298.154mil|Location2.Y=2305.873mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4663.015mil|Location2.X=4673.18mil|Location1.Y=2298.154mil|Location2.Y=2305.873mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R50-1(119mm,57.9mm) on Bottom Layer And Track (118.3mm,58.6mm)(118.492mm,58.6mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4699.909mil|Location2.X=4710.102mil|Location1.Y=2297.686mil|Location2.Y=2305.309mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4699.909mil|Location2.X=4710.102mil|Location1.Y=2297.686mil|Location2.Y=2305.309mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R50-1(119mm,57.9mm) on Bottom Layer And Track (119.508mm,58.6mm)(119.7mm,58.6mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4663.015mil|Location2.X=4673.208mil|Location1.Y=2182.412mil|Location2.Y=2190.035mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4663.015mil|Location2.X=4673.208mil|Location1.Y=2182.412mil|Location2.Y=2190.035mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R50-2(119mm,56.1mm) on Bottom Layer And Track (118.3mm,55.4mm)(118.492mm,55.4mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4699.909mil|Location2.X=4710.074mil|Location1.Y=2182.88mil|Location2.Y=2190.599mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4699.909mil|Location2.X=4710.074mil|Location1.Y=2182.88mil|Location2.Y=2190.599mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R50-2(119mm,56.1mm) on Bottom Layer And Track (119.508mm,55.4mm)(119.7mm,55.4mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4584.274mil|Location2.X=4594.439mil|Location1.Y=2298.154mil|Location2.Y=2305.873mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4584.274mil|Location2.X=4594.439mil|Location1.Y=2298.154mil|Location2.Y=2305.873mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R51-1(117mm,57.9mm) on Bottom Layer And Track (116.3mm,58.6mm)(116.492mm,58.6mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4621.168mil|Location2.X=4631.361mil|Location1.Y=2297.686mil|Location2.Y=2305.309mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4621.168mil|Location2.X=4631.361mil|Location1.Y=2297.686mil|Location2.Y=2305.309mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R51-1(117mm,57.9mm) on Bottom Layer And Track (117.508mm,58.6mm)(117.7mm,58.6mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4584.274mil|Location2.X=4594.467mil|Location1.Y=2182.412mil|Location2.Y=2190.035mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4584.274mil|Location2.X=4594.467mil|Location1.Y=2182.412mil|Location2.Y=2190.035mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R51-2(117mm,56.1mm) on Bottom Layer And Track (116.3mm,55.4mm)(116.492mm,55.4mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4621.168mil|Location2.X=4631.334mil|Location1.Y=2182.88mil|Location2.Y=2190.599mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4621.168mil|Location2.X=4631.334mil|Location1.Y=2182.88mil|Location2.Y=2190.599mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R51-2(117mm,56.1mm) on Bottom Layer And Track (117.508mm,55.4mm)(117.7mm,55.4mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6592.148mil|Location2.X=6602.341mil|Location1.Y=2674.538mil|Location2.Y=2682.161mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6592.148mil|Location2.X=6602.341mil|Location1.Y=2674.538mil|Location2.Y=2682.161mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R52-1(168mm,68.6mm) on Top Layer And Track (167.3mm,67.9mm)(167.492mm,67.9mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6629.042mil|Location2.X=6639.208mil|Location1.Y=2675.006mil|Location2.Y=2682.725mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6629.042mil|Location2.X=6639.208mil|Location1.Y=2675.006mil|Location2.Y=2682.725mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R52-1(168mm,68.6mm) on Top Layer And Track (168.508mm,67.9mm)(168.7mm,67.9mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6592.148mil|Location2.X=6602.313mil|Location1.Y=2790.28mil|Location2.Y=2797.999mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6592.148mil|Location2.X=6602.313mil|Location1.Y=2790.28mil|Location2.Y=2797.999mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R52-2(168mm,70.4mm) on Top Layer And Track (167.3mm,71.1mm)(167.492mm,71.1mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6629.042mil|Location2.X=6639.235mil|Location1.Y=2789.812mil|Location2.Y=2797.435mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6629.042mil|Location2.X=6639.235mil|Location1.Y=2789.812mil|Location2.Y=2797.435mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R52-2(168mm,70.4mm) on Top Layer And Track (168.508mm,71.1mm)(168.7mm,71.1mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3226.007mil|Location2.X=3236.2mil|Location1.Y=1709.971mil|Location2.Y=1717.594mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3226.007mil|Location2.X=3236.2mil|Location1.Y=1709.971mil|Location2.Y=1717.594mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R60-1(82.5mm,44.1mm) on Bottom Layer And Track (81.8mm,43.4mm)(81.992mm,43.4mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3262.901mil|Location2.X=3273.066mil|Location1.Y=1710.439mil|Location2.Y=1718.158mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3262.901mil|Location2.X=3273.066mil|Location1.Y=1710.439mil|Location2.Y=1718.158mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R60-1(82.5mm,44.1mm) on Bottom Layer And Track (83.008mm,43.4mm)(83.2mm,43.4mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3226.007mil|Location2.X=3236.172mil|Location1.Y=1825.713mil|Location2.Y=1833.432mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3226.007mil|Location2.X=3236.172mil|Location1.Y=1825.713mil|Location2.Y=1833.432mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R60-2(82.5mm,45.9mm) on Bottom Layer And Track (81.8mm,46.6mm)(81.992mm,46.6mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3262.901mil|Location2.X=3273.094mil|Location1.Y=1825.245mil|Location2.Y=1832.868mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3262.901mil|Location2.X=3273.094mil|Location1.Y=1825.245mil|Location2.Y=1832.868mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R60-2(82.5mm,45.9mm) on Bottom Layer And Track (83.008mm,46.6mm)(83.2mm,46.6mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3639.392mil|Location2.X=3649.585mil|Location1.Y=1847.766mil|Location2.Y=1855.389mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3639.392mil|Location2.X=3649.585mil|Location1.Y=1847.766mil|Location2.Y=1855.389mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R61-1(93mm,47.6mm) on Bottom Layer And Track (92.3mm,46.9mm)(92.492mm,46.9mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3676.287mil|Location2.X=3686.452mil|Location1.Y=1848.234mil|Location2.Y=1855.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3676.287mil|Location2.X=3686.452mil|Location1.Y=1848.234mil|Location2.Y=1855.953mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R61-1(93mm,47.6mm) on Bottom Layer And Track (93.508mm,46.9mm)(93.7mm,46.9mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3639.392mil|Location2.X=3649.557mil|Location1.Y=1963.508mil|Location2.Y=1971.227mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3639.392mil|Location2.X=3649.557mil|Location1.Y=1963.508mil|Location2.Y=1971.227mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R61-2(93mm,49.4mm) on Bottom Layer And Track (92.3mm,50.1mm)(92.492mm,50.1mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3676.287mil|Location2.X=3686.479mil|Location1.Y=1963.04mil|Location2.Y=1970.664mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3676.287mil|Location2.X=3686.479mil|Location1.Y=1963.04mil|Location2.Y=1970.664mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R61-2(93mm,49.4mm) on Bottom Layer And Track (93.508mm,50.1mm)(93.7mm,50.1mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3639.392mil|Location2.X=3649.585mil|Location1.Y=1709.971mil|Location2.Y=1717.594mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3639.392mil|Location2.X=3649.585mil|Location1.Y=1709.971mil|Location2.Y=1717.594mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R62-1(93mm,44.1mm) on Bottom Layer And Track (92.3mm,43.4mm)(92.492mm,43.4mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3676.287mil|Location2.X=3686.452mil|Location1.Y=1710.439mil|Location2.Y=1718.158mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3676.287mil|Location2.X=3686.452mil|Location1.Y=1710.439mil|Location2.Y=1718.158mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R62-1(93mm,44.1mm) on Bottom Layer And Track (93.508mm,43.4mm)(93.7mm,43.4mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3639.392mil|Location2.X=3649.557mil|Location1.Y=1825.713mil|Location2.Y=1833.432mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3639.392mil|Location2.X=3649.557mil|Location1.Y=1825.713mil|Location2.Y=1833.432mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R62-2(93mm,45.9mm) on Bottom Layer And Track (92.3mm,46.6mm)(92.492mm,46.6mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3676.287mil|Location2.X=3686.479mil|Location1.Y=1825.245mil|Location2.Y=1832.868mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3676.287mil|Location2.X=3686.479mil|Location1.Y=1825.245mil|Location2.Y=1832.868mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R62-2(93mm,45.9mm) on Bottom Layer And Track (93.508mm,46.6mm)(93.7mm,46.6mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2950.416mil|Location2.X=2960.609mil|Location1.Y=1887.136mil|Location2.Y=1894.759mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2950.416mil|Location2.X=2960.609mil|Location1.Y=1887.136mil|Location2.Y=1894.759mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R64-1(75.5mm,48.6mm) on Bottom Layer And Track (74.8mm,47.9mm)(74.992mm,47.9mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2987.31mil|Location2.X=2997.475mil|Location1.Y=1887.604mil|Location2.Y=1895.323mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2987.31mil|Location2.X=2997.475mil|Location1.Y=1887.604mil|Location2.Y=1895.323mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R64-1(75.5mm,48.6mm) on Bottom Layer And Track (76.008mm,47.9mm)(76.2mm,47.9mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2950.416mil|Location2.X=2960.581mil|Location1.Y=2002.878mil|Location2.Y=2010.598mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2950.416mil|Location2.X=2960.581mil|Location1.Y=2002.878mil|Location2.Y=2010.598mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R64-2(75.5mm,50.4mm) on Bottom Layer And Track (74.8mm,51.1mm)(74.992mm,51.1mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2987.31mil|Location2.X=2997.503mil|Location1.Y=2002.41mil|Location2.Y=2010.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2987.31mil|Location2.X=2997.503mil|Location1.Y=2002.41mil|Location2.Y=2010.034mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R64-2(75.5mm,50.4mm) on Bottom Layer And Track (76.008mm,51.1mm)(76.2mm,51.1mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3974.038mil|Location2.X=3984.231mil|Location1.Y=2005.246mil|Location2.Y=2012.87mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3974.038mil|Location2.X=3984.231mil|Location1.Y=2005.246mil|Location2.Y=2012.87mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R65-1(101.5mm,51.6mm) on Bottom Layer And Track (100.8mm,50.9mm)(100.992mm,50.9mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4010.932mil|Location2.X=4021.097mil|Location1.Y=2005.714mil|Location2.Y=2013.433mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4010.932mil|Location2.X=4021.097mil|Location1.Y=2005.714mil|Location2.Y=2013.433mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R65-1(101.5mm,51.6mm) on Bottom Layer And Track (102.008mm,50.9mm)(102.2mm,50.9mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3974.038mil|Location2.X=3984.203mil|Location1.Y=2120.988mil|Location2.Y=2128.708mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3974.038mil|Location2.X=3984.203mil|Location1.Y=2120.988mil|Location2.Y=2128.708mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R65-2(101.5mm,53.4mm) on Bottom Layer And Track (100.8mm,54.1mm)(100.992mm,54.1mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4010.932mil|Location2.X=4021.125mil|Location1.Y=2120.521mil|Location2.Y=2128.144mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4010.932mil|Location2.X=4021.125mil|Location1.Y=2120.521mil|Location2.Y=2128.144mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.133mm &lt; 0.15mm) Between Pad R65-2(101.5mm,53.4mm) on Bottom Layer And Track (102.008mm,54.1mm)(102.2mm,54.1mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.133mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID0B441OROJJV5D342PGFOI3GTZNE05HSQ0VNKVVFM1HGRU2RYNMRP"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=0.15mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6697.011mil|Location2.X=6701.948mil|Location1.Y=2733.746mil|Location2.Y=2738.683mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6697.011mil|Location2.X=6701.948mil|Location1.Y=2733.746mil|Location2.Y=2738.683mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.15mm) Between Text "LV_POWER" (170.097mm,68.809mm) on Top Overlay And Text "R52" (169.167mm,68.5mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDIFMM0D23WBCRJDWAB4NITFFDAGMAY2BVJZTOADGSSMRRLXJ0PWCF"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Board Clearance Constraint (Gap=0mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5623.391mil|Location2.X=5636.452mil|Location1.Y=1179.493mil|Location2.Y=1192.554mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5623.391mil|Location2.X=5636.452mil|Location1.Y=1179.493mil|Location2.Y=1192.554mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.25mm &lt; 0.3mm) Between Arc (143mm,35mm) on Top Overlay And Board Edge </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1179.493mil|Location2.X=1192.554mil|Location1.Y=1371.422mil|Location2.Y=1384.483mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1179.493mil|Location2.X=1192.554mil|Location1.Y=1371.422mil|Location2.Y=1384.483mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.25mm &lt; 0.3mm) Between Arc (35mm,35mm) on Top Overlay And Board Edge </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1179.493mil|Location2.X=1192.554mil|Location1.Y=2946.225mil|Location2.Y=2959.286mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1179.493mil|Location2.X=1192.554mil|Location1.Y=2946.225mil|Location2.Y=2959.286mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.25mm &lt; 0.3mm) Between Arc (35mm,75mm) on Top Overlay And Board Edge </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3654.887mil|Location2.X=3667.948mil|Location1.Y=3138.155mil|Location2.Y=3151.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3654.887mil|Location2.X=3667.948mil|Location1.Y=3138.155mil|Location2.Y=3151.216mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.25mm &lt; 0.3mm) Between Arc (93mm,75mm) on Top Overlay And Board Edge </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4129.421mil|Location2.X=4138.295mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4129.421mil|Location2.X=4138.295mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,30mm)(105mm,51.5mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4129.421mil|Location2.X=4138.295mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4129.421mil|Location2.X=4138.295mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,30mm)(105mm,51.5mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4130.524mil|Location2.X=4139.398mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4130.524mil|Location2.X=4139.398mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,30mm)(115mm,40mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4130.524mil|Location2.X=4139.398mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4130.524mil|Location2.X=4139.398mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,30mm)(115mm,40mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4226.743mil|Location2.X=4235.617mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4226.743mil|Location2.X=4235.617mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,32.5mm)(107.5mm,30mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4226.743mil|Location2.X=4235.617mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4226.743mil|Location2.X=4235.617mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,32.5mm)(107.5mm,30mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4325.169mil|Location2.X=4334.043mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4325.169mil|Location2.X=4334.043mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,35mm)(110mm,30mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4325.169mil|Location2.X=4334.043mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4325.169mil|Location2.X=4334.043mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,35mm)(110mm,30mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4423.594mil|Location2.X=4432.468mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4423.594mil|Location2.X=4432.468mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,37.5mm)(112.5mm,30mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4423.594mil|Location2.X=4432.468mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4423.594mil|Location2.X=4432.468mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,37.5mm)(112.5mm,30mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4522.019mil|Location2.X=4530.893mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4522.019mil|Location2.X=4530.893mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,40mm)(115mm,30mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4522.019mil|Location2.X=4530.893mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4522.019mil|Location2.X=4530.893mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,40mm)(115mm,30mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4129.421mil|Location2.X=4138.295mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4129.421mil|Location2.X=4138.295mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,58.5mm)(105mm,80mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4129.421mil|Location2.X=4138.295mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4129.421mil|Location2.X=4138.295mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,58.5mm)(105mm,80mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4522.019mil|Location2.X=4530.893mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4522.019mil|Location2.X=4530.893mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,70mm)(115mm,80mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4522.019mil|Location2.X=4530.893mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4522.019mil|Location2.X=4530.893mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,70mm)(115mm,80mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4423.594mil|Location2.X=4432.468mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4423.594mil|Location2.X=4432.468mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,72.5mm)(112.5mm,80mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4423.594mil|Location2.X=4432.468mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4423.594mil|Location2.X=4432.468mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,72.5mm)(112.5mm,80mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4325.169mil|Location2.X=4334.043mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4325.169mil|Location2.X=4334.043mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,75mm)(110mm,80mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4325.169mil|Location2.X=4334.043mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4325.169mil|Location2.X=4334.043mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,75mm)(110mm,80mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4226.743mil|Location2.X=4235.617mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4226.743mil|Location2.X=4235.617mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,77.5mm)(107.5mm,80mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4226.743mil|Location2.X=4235.617mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4226.743mil|Location2.X=4235.617mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,77.5mm)(107.5mm,80mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4130.524mil|Location2.X=4139.398mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4130.524mil|Location2.X=4139.398mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,80mm)(115mm,70mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4130.524mil|Location2.X=4139.398mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4130.524mil|Location2.X=4139.398mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (105mm,80mm)(115mm,70mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4228.949mil|Location2.X=4237.824mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4228.949mil|Location2.X=4237.824mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (107.5mm,30mm)(115mm,37.5mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4228.949mil|Location2.X=4237.824mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4228.949mil|Location2.X=4237.824mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (107.5mm,30mm)(115mm,37.5mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4227.846mil|Location2.X=4236.721mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4227.846mil|Location2.X=4236.721mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (107.5mm,80mm)(107.5mm,80mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4227.846mil|Location2.X=4236.721mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4227.846mil|Location2.X=4236.721mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (107.5mm,80mm)(107.5mm,80mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4228.949mil|Location2.X=4237.824mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4228.949mil|Location2.X=4237.824mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (107.5mm,80mm)(115mm,72.5mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4228.949mil|Location2.X=4237.824mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4228.949mil|Location2.X=4237.824mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (107.5mm,80mm)(115mm,72.5mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4327.375mil|Location2.X=4336.249mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4327.375mil|Location2.X=4336.249mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (110mm,30mm)(115mm,35mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4327.375mil|Location2.X=4336.249mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4327.375mil|Location2.X=4336.249mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (110mm,30mm)(115mm,35mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4327.375mil|Location2.X=4336.249mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4327.375mil|Location2.X=4336.249mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (110mm,80mm)(115mm,75mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4327.375mil|Location2.X=4336.249mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4327.375mil|Location2.X=4336.249mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (110mm,80mm)(115mm,75mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4425.8mil|Location2.X=4434.674mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4425.8mil|Location2.X=4434.674mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (112.5mm,30mm)(115mm,32.5mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4425.8mil|Location2.X=4434.674mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4425.8mil|Location2.X=4434.674mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (112.5mm,30mm)(115mm,32.5mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4425.8mil|Location2.X=4434.674mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4425.8mil|Location2.X=4434.674mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (112.5mm,80mm)(115mm,77.5mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4425.8mil|Location2.X=4434.674mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4425.8mil|Location2.X=4434.674mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (112.5mm,80mm)(115mm,77.5mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4523.122mil|Location2.X=4531.996mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4523.122mil|Location2.X=4531.996mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (115mm,30mm)(115mm,51.5mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4523.122mil|Location2.X=4531.996mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4523.122mil|Location2.X=4531.996mil|Location1.Y=1174.002mil|Location2.Y=1182.876mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (115mm,30mm)(115mm,51.5mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4523.122mil|Location2.X=4531.996mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4523.122mil|Location2.X=4531.996mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (115mm,58.5mm)(115mm,80mm) on Bottom Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4523.122mil|Location2.X=4531.996mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\nico\Baltic Racing\TY24_Local\Vicor_DCDC\Vicor_DCDC_Stackable\Vicor_DCDC_Stackable_PCB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4523.122mil|Location2.X=4531.996mil|Location1.Y=3147.833mil|Location2.Y=3156.707mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Track (115mm,58.5mm)(115mm,80mm) on Top Overlay </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

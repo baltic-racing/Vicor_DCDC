@@ -1,0 +1,7 @@
+Added Component: Designator=R13(STACKPOLE CSRN2512)
+Add component (AddParameter): Name = "Power"; Value = "1W"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage"; Value = "500V"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=NetC11_2 Pin=R13-1
+Added Pin To Net: NetName=NetD10_1 Pin=R13-2
+Added Member To Class: ClassName=Power_Circuitry Member=Component R13 SMD Resistor

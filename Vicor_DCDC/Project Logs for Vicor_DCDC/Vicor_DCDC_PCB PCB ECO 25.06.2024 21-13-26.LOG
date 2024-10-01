@@ -1,0 +1,6 @@
+Removed Member From Class: ClassName=HV_ACCU Member=HV_10_uFLT
+Removed Member From Class: ClassName=HV_ACCU Member=HV_20_uFLT
+Change Net Name : Old Net Name=HV_10_uFLT New Net Name=HV_Mid
+Change Net Name : Old Net Name=HV_20_uFLT New Net Name=HV_Low
+Added Member To Class: ClassName=HV_ACCU Member=Wire HV_Low
+Added Member To Class: ClassName=HV_ACCU Member=Wire HV_Mid

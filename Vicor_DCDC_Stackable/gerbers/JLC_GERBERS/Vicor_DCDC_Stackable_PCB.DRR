@@ -1,0 +1,28 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: Vicor_DCDC_Stackable_PCB.PcbDoc   14.07.2024  17:44:16
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : Vicor_DCDC_Stackable_PCB.TXT
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      20mil (0.5mm)                                             Round             17        PTH        10.31inch (261.88mm)
+T2      35mil (0.9mm)                                             Round             4         PTH        1.09inch (27.69mm)
+T3      39mil (1mm)                                               Round             4         PTH        2.56inch (65.00mm)
+T4      40mil (1.02mm)                                            Round             18        PTH        5.34inch (135.76mm)
+T5      43mil (1.1mm)                                             Round             8         PTH        7.48inch (190.11mm)
+T6      59mil (1.5mm)                                             Round             3         PTH        0.22inch (5.51mm)
+T7      65mil (1.65mm)                                            Round             4         PTH        0.80inch (20.27mm)
+T8      73mil (1.85mm)                                            Round             4         PTH        0.67inch (17.10mm)
+T9      83mil (2.1mm)                                             Round             2         PTH        0.63inch (16.00mm)
+T10     91mil (2.3mm)                                             Round             4         PTH        0.65inch (16.50mm)
+T11     98mil (2.5mm)                                             Round             4         PTH        1.71inch (43.49mm)
+T12     122mil (3.1mm)                                            Round             2         PTH        0.63inch (16.04mm)
+T13     169mil (4.3mm)                                            Round             2         PTH        1.57inch (40.00mm)
+T14     40mil (1.02mm)                                            Round             6         NPTH       4.63inch (117.62mm)
+T15     169mil (4.3mm)                                            Round             4         NPTH       9.06inch (230.03mm)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              86
+
+Total Processing Time (hh:mm:ss) : 00:00:00
